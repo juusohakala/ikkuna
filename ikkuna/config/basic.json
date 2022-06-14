@@ -1,0 +1,42 @@
+{
+	"Hotkeys":
+	[
+		{
+			"Key": "alt+left",
+			"MoveLeft": true
+		},
+		{
+			"Key": "alt+right",
+			"MoveRight": true
+		},
+		{
+			"Key": "alt+up",
+			"ResizeUp": 5.0
+		},
+		{
+			"Key": "alt+down",
+			"ResizeDown": 5.0
+		},
+		{
+			"Key": "alt+enter",
+			"ResizeToFillSlot": true
+		}
+	],
+	"Slots":
+	[
+		{
+			"SlotName": "left",
+			"X": 0.0,
+			"Y": 0.0,
+			"Width": 50.0,
+			"Height": 100.0
+		},
+		{
+			"SlotName": "right",
+			"X": 50.0,
+			"Y": 0.0,
+			"Width": 50.0,
+			"Height": 100.0
+		}
+	]
+}

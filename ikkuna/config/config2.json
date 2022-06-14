@@ -1,0 +1,49 @@
+{
+	"Hotkeys":
+	[
+		{
+			"Key": "alt+left",
+			"MoveLeft": true
+		},
+		{
+			"Key": "alt+right",
+			"MoveRight": true
+		},
+		{
+			"Key": "alt+up",
+			"Resize": 2
+		},
+		{
+			"Key": "alt+down",
+			"Resize": -2
+		},
+		{
+			"Key": "alt+enter",
+			"ResizeToFillSlot": true
+		}
+	],
+	"Slots":
+	[
+		{
+			"SlotName": "left",
+			"X": 0.0,
+			"Y": 0.0,
+			"Width": 33.33,
+			"Height": 100.0
+		},
+		{
+			"SlotName": "middle",
+			"X": 33.33,
+			"Y": 0.0,
+			"Width": 33.33,
+			"Height": 100.0
+		},
+		{
+			"SlotName": "right",
+			"X": 66.66,
+			"Y": 0.0,
+			"Width": 33.33,
+			"Height": 100.0
+		}
+	]
+}
