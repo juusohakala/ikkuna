@@ -11,13 +11,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="config\config3.json">
+    <None Update="Config\config3.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="config\config2.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="config\config.json">
+    <None Update="logo.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

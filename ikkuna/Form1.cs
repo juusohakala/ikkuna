@@ -8,10 +8,13 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 
-namespace ikkuna.forms
+namespace ikkuna
 {
-    public partial class FormMain : Form
+    public partial class Form1 : Form
     {
+
+
+
         //public static bool Eq(double a, double b)
         //{
         //    // As the pixel values are also double, we need this to compare those.
@@ -94,8 +97,9 @@ namespace ikkuna.forms
 
 
 
-        public FormMain()
+        public Form1()
         {
+
 
             //Config = new Config()
             //{
@@ -303,7 +307,7 @@ namespace ikkuna.forms
                                     {
                                         //if (window.ActuallyFillsSlot)
                                         //{
-                                            window.ResizeToFillSlot();
+                                        window.ResizeToFillSlot();
                                         //}
                                         //else
                                         //{

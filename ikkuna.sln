@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31112.23
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ikkuna", "ikkuna\ikkuna.csproj", "{BFB33D95-8D6F-4F2B-BC68-D8ED39D7B97C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ikkuna", "ikkuna\ikkuna.csproj", "{3199DDB6-27F3-48A0-9228-BEDB1703BEB4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{BFB33D95-8D6F-4F2B-BC68-D8ED39D7B97C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BFB33D95-8D6F-4F2B-BC68-D8ED39D7B97C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BFB33D95-8D6F-4F2B-BC68-D8ED39D7B97C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BFB33D95-8D6F-4F2B-BC68-D8ED39D7B97C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3199DDB6-27F3-48A0-9228-BEDB1703BEB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3199DDB6-27F3-48A0-9228-BEDB1703BEB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3199DDB6-27F3-48A0-9228-BEDB1703BEB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3199DDB6-27F3-48A0-9228-BEDB1703BEB4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {BEC4E875-7977-4F9A-B643-EAE7F50F8F03}
+		SolutionGuid = {DCD1B2A2-AD78-4793-A646-C5CCB6A41996}
 	EndGlobalSection
 EndGlobal
