@@ -19,18 +19,33 @@ namespace ikkuna
         public double W { get; set; }
         public double H { get; set; }
 
-        public double CenterX { get; set; }
-        public double CenterY { get; set; }
+        public double CenterX
+        {
+            get
+            {
+                return X + W / 2;
+            }
+        }
+
+        public double CenterY
+        {
+            get
+            {
+                return Y + H / 2;
+            }
+        }
 
         // Original floating window size, used when cycling fill slot on off
-        public double OriginalX { get; set; }
-        public double OriginalY { get; set; }
-        public double OriginalW { get; set; }
-        public double OriginalH { get; set; }
+        //public double OriginalX { get; set; }
+        //public double OriginalY { get; set; }
+        //public double OriginalW { get; set; }
+        //public double OriginalH { get; set; }
 
-        public bool ActuallyFillsSlot { get; set; }
-        public bool WantsToFillSlot { get; set; }
+        //public bool ActuallyFillsSlot { get; set; }
+        //public bool WantsToFillSlot { get; set; }
         public Slot Slot { get; set; }
+
+        public bool FillSlot { get; set; }
 
 
         private const short SWP_NOMOVE = 0X2;
@@ -93,116 +108,102 @@ namespace ikkuna
 
 
 
-        public void MoveToSlot(Slot slot = null)
+        public void MoveToSlot(Slot slot)
         {
-            if (slot != null)
-            {
-                Slot = slot;
-            }
+            Slot = slot;
+        }
 
-
-            if (W > Slot.W)
-            {
-                W = Slot.W;
-                X = Slot.X;
-                OriginalX = Slot.X;
-            }
-            else
-            {
-                X = Slot.X + Slot.W / 2 - W / 2;
-                OriginalX = Slot.X + Slot.W / 2 - OriginalW / 2;
-            }
-
-
-            if (H > Slot.H)
-            {
-                H = Slot.H;
-                Y = Slot.Y;
-                OriginalY = Slot.Y;
-            }
-            else
-            {
-                Y = Slot.Y + Slot.H / 2 - H / 2;
-                OriginalY = Slot.Y + Slot.H / 2 - OriginalH / 2;
-            }
-
-
-
-
-
-
-
-
-
+        public void CycleResizeToFillSlot()
+        {
+            FillSlot = true;
         }
 
 
-
-        public void UpdateFirst()
+        public void GetRealDimensions()
         {
+
+            // ehkä slottia voi resize jos hiirellä siirretty reunaa???
+
+
+            // benchmark without this?
             var rect = new Rect();
             if (!GetWindowRect(WindowHandle, ref rect))
             {
                 throw new Exception("Can't read window bounds");
             }
-
             X = rect.Left;
             Y = rect.Top;
             W = rect.Right - rect.Left;
             H = rect.Bottom - rect.Top;
-            CenterX = X + W / 2;
-            CenterY = Y + H / 2;
+            //CenterX = X + W / 2;
+            //CenterY = Y + H / 2;
 
-            if (Slot != null)
+            if(Slot != null)
             {
                 if (Eq(W, Slot.W) && Eq(H, Slot.H) && Eq(X, Slot.X) && Eq(Y, Slot.Y))
                 //if (X == Slot.X && Y == Slot.Y && W == Slot.W && H == Slot.H)
                 {
-                    ActuallyFillsSlot = true;
+                    FillSlot = true;
+                    //ActuallyFillsSlot = true;
                 }
                 else
                 {
-                    ActuallyFillsSlot = false;
+                    FillSlot = false;
+                    //ActuallyFillsSlot = false;
                 }
             }
 
-
         }
 
-        public void CycleResizeToFillSlot()
+
+        public void Update()
         {
-            WantsToFillSlot = true;
-            //if (FillsSlot)
-            //{
-            //    X = OriginalX;
-            //    Y = OriginalY;
-            //    W = OriginalW;
-            //    H = OriginalH;
-
-            //}
-            //else
+            if (Slot != null)
             {
-                OriginalX = X;
-                OriginalY = Y;
-                OriginalW = W;
-                OriginalH = H;
 
-                ResizeToFillSlot();
+                if (FillSlot)
+                {
+                    X = Slot.X;
+                    Y = Slot.Y;
+                    W = Slot.W;
+                    H = Slot.H;
+                }
+                else
+                {
+                    if (W > Slot.W)
+                    {
+                        W = Slot.W;
+                        X = Slot.X;
+                        //OriginalX = Slot.X;
+                    }
+                    else
+                    {
+                        X = Slot.X + Slot.W / 2 - W / 2;
+                        //OriginalX = Slot.X + Slot.W / 2 - OriginalW / 2;
+                    }
+
+
+                    if (H > Slot.H)
+                    {
+                        H = Slot.H;
+                        Y = Slot.Y;
+                        //OriginalY = Slot.Y;
+                    }
+                    else
+                    {
+                        Y = Slot.Y + Slot.H / 2 - H / 2;
+                        //OriginalY = Slot.Y + Slot.H / 2 - OriginalH / 2;
+                    }
+                }
+
+
+
+
             }
 
-        }
 
-        public void ResizeToFillSlot()
-        {
-            X = Slot.X;
-            Y = Slot.Y;
-            W = Slot.W;
-            H = Slot.H;
-            ActuallyFillsSlot = true;
-        }
 
-        public void UpdateLast()
-        {
+
 
             SetPosByPixels(X, Y, W, H);
 

@@ -149,7 +149,7 @@ namespace ikkuna
             //var configString = JsonConvert.SerializeObject(Config);
             //Debug.WriteLine(configString);
 
-            Config = JsonConvert.DeserializeObject<Config>(File.ReadAllText("config/config3.json"));
+            Config = JsonConvert.DeserializeObject<Config>(File.ReadAllText("ikkunaconfig.json"));
 
             var configString = JsonConvert.SerializeObject(Config);
             Debug.WriteLine(configString);
@@ -203,7 +203,7 @@ namespace ikkuna
                 }
 
                 var activeWindow = Windows[activeWindowHandle];
-                activeWindow.UpdateFirst();
+                activeWindow.GetRealDimensions();
 
                 foreach (var hotkey in Config.Hotkeys)
                 {
@@ -255,17 +255,21 @@ namespace ikkuna
                                     }
                                 }
                             }
+
+                            // ResizeToFillSlot
                             activeWindow.CycleResizeToFillSlot();
                         }
 
                         // Resize
                         if (hotkey.Resize != 0)
                         {
+
+                            // todo multiscreen
                             var screenW = Screen.PrimaryScreen.WorkingArea.Width;
                             var screenH = Screen.PrimaryScreen.WorkingArea.Height;
                             var sizeUnit = hotkey.Resize / 100 * screenH;
 
-                            if (activeWindow.ActuallyFillsSlot)
+                            if (activeWindow.FillSlot)
                             {
 
 
@@ -273,48 +277,11 @@ namespace ikkuna
 
 
 
-                                //var rightSlots = Config.Slots.Where(slot => activeWindow.CenterY < slot.Y + slot.H && activeWindow.CenterY > slot.Y && slot.X > activeWindow.CenterX);
-                                //var leftSlots = Config.Slots.Where(slot => activeWindow.CenterY < slot.Y + slot.H && activeWindow.CenterY > slot.Y && slot.X + slot.W < activeWindow.CenterX);
-
-                                //// slot is in between other slots
-                                //if(rightSlots.Any() && leftSlots.Any())
-                                //{
-                                //    activeWindow.Slot.W += sizeUnit;
-                                //    activeWindow.Slot.X -= sizeUnit / 2;
-
-                                //    foreach(var rightSlot in rightSlots)
-                                //    {
-                                //        rightSlot.W -= sizeUnit / rightSlots.Count();
-                                //        rightSlot.X += sizeUnit / 2 / rightSlots.Count();
-                                //    }
-
-                                //    foreach (var leftSlot in leftSlots)
-                                //    {
-                                //        leftSlot.W -= sizeUnit / leftSlots.Count();
-                                //        leftSlot.X += sizeUnit / 2 / leftSlots.Count();
-                                //    }
-
-                                //}
-
-
-                                //var widthChange = activeWindow.Slot.W = activeWindow.Slot.W ;
-                                //activeWindow.Slot.X = activeWindow.Slot.X - (activeWindow.Slot.W - activeWindow.Slot.W) / 2;
-
-
                                 foreach (var window in Windows.Values)
                                 {
                                     if (window.Slot != null)
                                     {
-                                        //if (window.ActuallyFillsSlot)
-                                        //{
-                                        window.ResizeToFillSlot();
-                                        //}
-                                        //else
-                                        //{
-                                        //    window.MoveToSlot();
-                                        //}
-
-                                        window.UpdateLast();
+                                        window.Update();
                                     }
                                 }
                             }
@@ -326,59 +293,16 @@ namespace ikkuna
                                 activeWindow.H += sizeUnit;
                                 activeWindow.Y -= sizeUnit / 2;
 
-                                //var oldWidth = activeWindow.W;
-                                //activeWindow.W = activeWindow.W * (100 + hotkey.Resize) / 100;
-                                //activeWindow.X = activeWindow.X - (activeWindow.W - oldWidth) / 2;
 
-                                //var oldHeight = activeWindow.H;
-                                //activeWindow.H = activeWindow.H * (100 + hotkey.Resize) / 100;
-                                //activeWindow.Y = activeWindow.Y - (activeWindow.H - oldHeight) / 2;
-
-
-                                // Make sure window is not resized beyond its slot size
-                                if (activeWindow.Slot != null)
-                                {
-                                    if (activeWindow.X < activeWindow.Slot.X)
-                                        activeWindow.X = activeWindow.Slot.X;
-                                    if (activeWindow.W > activeWindow.Slot.W)
-                                        activeWindow.W = activeWindow.Slot.W;
-
-
-                                    if (activeWindow.Y < activeWindow.Slot.Y)
-                                        activeWindow.Y = activeWindow.Slot.Y;
-                                    if (activeWindow.H > activeWindow.Slot.H)
-                                        activeWindow.H = activeWindow.Slot.H;
-
-                                }
 
                             }
                         }
                     }
                 }
 
-                activeWindow.UpdateLast();
+                activeWindow.Update();
 
 
-
-
-                //if (Hotkeys["left"].IsHit(id))
-                //{
-                //    var slot = Layout.GetSlotByName("left");
-                //    Windows[activeWindowHandle].SetPosByPercentage(slot.X, slot.Y, slot.Width, slot.Height);
-                //}
-
-                //if (Hotkeys["right"].IsHit(id))
-                //{
-                //    var slot = Layout.GetSlotByName("right");
-                //    Windows[activeWindowHandle].SetPosByPercentage(slot.X, slot.Y, slot.Width, slot.Height);
-                //}
-
-
-
-                //if (Hotkeys["left"].IsHit(id))
-                //{
-                //	Overlay.Refresh();
-                //}
             }
 
 

@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Config\config3.json">
+    <None Update="ikkunaconfig.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="logo.ico">
