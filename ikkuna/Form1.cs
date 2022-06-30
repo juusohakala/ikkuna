@@ -219,22 +219,30 @@ namespace ikkuna
                         // MoveRight
                         if (hotkey.MoveRight)
                         {
-                            var rightSlots = Config.Slots.Where(slot => activeWindow.CenterY < slot.Y + slot.H && activeWindow.CenterY > slot.Y && slot.X > activeWindow.CenterX);
-                            var closestSlot = rightSlots.OrderBy(slot => slot.X).FirstOrDefault();
-                            if (closestSlot != null) //tähän olis kiva löytää joku slotti kuitenkin
+                            var allSlotsFromLeftToRight = Config.Slots.OrderBy(slot => slot.X);
+                            var closestSlotRight = allSlotsFromLeftToRight.Where(slot => activeWindow.CenterY < slot.Y + slot.H && activeWindow.CenterY > slot.Y && slot.CenterX > activeWindow.CenterX).FirstOrDefault();
+                            if (closestSlotRight != null)
                             {
-                                activeWindow.MoveToSlot(closestSlot);
+                                activeWindow.MoveToSlot(closestSlotRight);
+                            }
+                            else
+                            {
+                                activeWindow.MoveToSlot(allSlotsFromLeftToRight.Last());
                             }
                         }
 
                         // MoveLeft
                         if (hotkey.MoveLeft)
                         {
-                            var leftSlots = Config.Slots.Where(slot => activeWindow.CenterY < slot.Y + slot.H && activeWindow.CenterY > slot.Y && slot.X + slot.W < activeWindow.CenterX);
-                            var closestSlot = leftSlots.OrderByDescending(slot => slot.X).FirstOrDefault();
-                            if (closestSlot != null)
+                            var allSlotsFromRightToLeft = Config.Slots.OrderByDescending(slot => slot.X);
+                            var closestSlotLeft = allSlotsFromRightToLeft.Where(slot => activeWindow.CenterY < slot.Y + slot.H && activeWindow.CenterY > slot.Y && slot.CenterX < activeWindow.CenterX).FirstOrDefault();
+                            if (closestSlotLeft != null)
                             {
-                                activeWindow.MoveToSlot(closestSlot);
+                                activeWindow.MoveToSlot(closestSlotLeft);
+                            }
+                            else
+                            {
+                                activeWindow.MoveToSlot(allSlotsFromRightToLeft.Last());
                             }
                         }
 
